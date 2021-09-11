@@ -1,0 +1,8 @@
+<html>
+    <form method="POST" action="/main_views/submit">
+        {{ form.csrf_token }}
+        {{ form.title.label }} {{ form.title(size=20) }}
+        {{ form.date.label }} {{ form.date }}
+        <input type="submit" value="Go">
+    </form>
+</html>

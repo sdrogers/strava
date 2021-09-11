@@ -1,6 +1,15 @@
+# from _typeshed import BytesPath
 from flask import (
-    Blueprint, redirect, render_template, request, session, Response
+    Blueprint, redirect, render_template, request, session, Response, url_for
 )
+
+
+import datetime
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.fields.html5 import DateField
+from wtforms.validators import DataRequired
+
 import requests
 
 import io
@@ -175,3 +184,19 @@ def analysis():
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
 
+
+class InputForm(FlaskForm):
+    title = StringField('name', validators=[DataRequired()])
+    date = DateField('start date', validators=[DataRequired()])
+
+@bp.route('/submit', methods=['GET', 'POST'])
+def form_test():
+    form = InputForm()
+    if form.validate_on_submit():
+        print(dir(form.title))
+        return render_template('success.html', name=form.title.data, start_date=form.date.data)
+    return render_template('submit.html', form=form)
+
+@bp.route('/success')
+def success():
+    return render_template('success.html')
