@@ -15,6 +15,7 @@ def create_app():
     def hello():
         return "Hello, World"
 
-    from . import main_views
+    from . import main_views, app_views
     app.register_blueprint(main_views.bp)
+    app.register_blueprint(app_views.av)
     return app

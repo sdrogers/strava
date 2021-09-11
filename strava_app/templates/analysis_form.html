@@ -1,0 +1,11 @@
+<html>
+<p>Access token = {{access_token}}. <a href="/app_views/get_access_token">Refresh</a></p>
+<p>Refresh token = {{refresh_token}}. <a href="/app_views/authenticate">Refresh</a></p>
+<form method="POST" action="/app_views/analysis_form">
+    {{ form.csrf_token }}
+    {{ form.recent_days.label }} {{ form.recent_days }}
+    {{ form.date.label }} {{ form.date }}
+    {{ form.max_hr.label }} {{ form.max_hr }}
+    <input type="submit" value="Go">
+</form>
+</html>
